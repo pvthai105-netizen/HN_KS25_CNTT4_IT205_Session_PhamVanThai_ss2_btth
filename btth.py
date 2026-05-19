@@ -1,6 +1,6 @@
 print(" --- HỆ THỐNG QUẢN LÝ PHÒNG KHÁM --- ")
 
-name = input("Nhập tên bệnh nhân: ").strip()
+name = input("Nhập tên bệnh nhân: ")
 year_of_birth = int(input("Nhập năm sinh: "))
 days_sick = int(input("Nhập số ngày bị bệnh: "))
 temperature = float(input("Nhập nhiệt độ cơ thể (°C): "))
@@ -8,16 +8,16 @@ base_fee = int(input("Nhập chi phí khám (VND): "))
 
 CURRENT_YEAR = 2026
 
-if name == "":
-    print("\n[LỖI] Tên không được để trống!")
+if not(name):
+    print("Lỗi: Tên không được để trống!")
 elif year_of_birth < 1900 or year_of_birth > CURRENT_YEAR:
-    print(f"\n[LỖI] Năm sinh không hợp lệ! Phải nằm trong khoảng 1900 đến {CURRENT_YEAR}.")
+    print(f"Lỗi: Năm sinh không hợp lệ! Phải nằm trong khoảng 1900 đến {CURRENT_YEAR}.")
 elif days_sick < 0:
-    print("\n[LỖI] Số ngày bị bệnh phải lớn hơn hoặc bằng 0!")
+    print("Lỗi: Số ngày bị bệnh phải lớn hơn hoặc bằng 0!")
 elif temperature < 30 or temperature > 45:
-    print("\n[LỖI] Nhiệt độ không hợp lệ! Phải nằm trong khoảng 30 đến 45°C.")
+    print("Lỗi: Nhiệt độ không hợp lệ! Phải nằm trong khoảng 30 đến 45°C.")
 elif base_fee <= 0:
-    print("\n[LỖI] Chi phí khám phải lớn hơn 0!")
+    print("Lỗi: Chi phí khám phải lớn hơn 0!")
 else:
     age = CURRENT_YEAR - year_of_birth
     surcharge = base_fee * 0.10
@@ -40,7 +40,10 @@ else:
     else:
         priority_level = "Bình thường"
 
-    cost_level = "Cao" if total_fee > 500000 else "Thấp"
+    if total_fee > 500000:
+        cost_level = "Cao"  
+    else:
+        cost_level = "Thấp"
 
     print("----KẾT QUẢ----")
     print(f"Tên: {name}")
@@ -51,5 +54,5 @@ else:
     print(f"Tình trạng: {health_status}")
     print(f"Mức độ ưu tiên: {priority_level}")
     
-    print(f"Tổng chi phí: {total_fee:,} VND")
+    print(f"Tổng chi phí: {total_fee} VND")
     print(f"Mức chi phí: {cost_level}")
